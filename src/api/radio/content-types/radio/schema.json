@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "radios",
+  "info": {
+    "singularName": "radio",
+    "pluralName": "radios",
+    "displayName": "Radio",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "import-export-entries": {
+      "idField": "id",
+      "createdAt": "created_on",
+      "updatedAt": "modified_on"
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category",
+      "required": true
+    },
+    "videos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "videos.video"
+    }
+  }
+}

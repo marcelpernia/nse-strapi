@@ -768,6 +768,149 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Categor\u00EDas';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    'import-export-entries': {
+      idField: 'id';
+    };
+  };
+  attributes: {
+    name: Attribute.String;
+    slug: Attribute.UID<'api::category.category', 'name'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCineCine extends Schema.CollectionType {
+  collectionName: 'cines';
+  info: {
+    singularName: 'cine';
+    pluralName: 'cines';
+    displayName: 'Cine';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    category: Attribute.Relation<
+      'api::cine.cine',
+      'oneToOne',
+      'api::category.category'
+    >;
+    slug: Attribute.UID<'api::cine.cine', 'title'> & Attribute.Required;
+    videos: Attribute.Component<'videos.video', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::cine.cine', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::cine.cine', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRadioRadio extends Schema.CollectionType {
+  collectionName: 'radios';
+  info: {
+    singularName: 'radio';
+    pluralName: 'radios';
+    displayName: 'Radio';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    'import-export-entries': {
+      idField: 'id';
+      createdAt: 'created_on';
+      updatedAt: 'modified_on';
+    };
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.UID<'api::radio.radio', 'title'> & Attribute.Required;
+    category: Attribute.Relation<
+      'api::radio.radio',
+      'oneToOne',
+      'api::category.category'
+    > &
+      Attribute.Required;
+    videos: Attribute.Component<'videos.video', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::radio.radio',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::radio.radio',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTvTv extends Schema.CollectionType {
+  collectionName: 'tvs';
+  info: {
+    singularName: 'tv';
+    pluralName: 'tvs';
+    displayName: 'TV';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.UID<'api::tv.tv', 'title'> & Attribute.Required;
+    category: Attribute.Relation<
+      'api::tv.tv',
+      'oneToOne',
+      'api::category.category'
+    >;
+    videos: Attribute.Component<'videos.video', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tv.tv', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tv.tv', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -786,6 +929,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::category.category': ApiCategoryCategory;
+      'api::cine.cine': ApiCineCine;
+      'api::radio.radio': ApiRadioRadio;
+      'api::tv.tv': ApiTvTv;
     }
   }
 }
