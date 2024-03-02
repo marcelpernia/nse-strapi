@@ -896,6 +896,79 @@ export interface ApiRadioRadio extends Schema.CollectionType {
   };
 }
 
+export interface ApiSectionSection extends Schema.CollectionType {
+  collectionName: 'sections';
+  info: {
+    singularName: 'section';
+    pluralName: 'sections';
+    displayName: 'Secciones';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    cine: Attribute.Relation<
+      'api::section.section',
+      'oneToMany',
+      'api::cine.cine'
+    >;
+    radio: Attribute.Relation<
+      'api::section.section',
+      'oneToMany',
+      'api::radio.radio'
+    >;
+    tv: Attribute.Relation<'api::section.section', 'oneToMany', 'api::tv.tv'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::section.section',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::section.section',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSliderSlider extends Schema.CollectionType {
+  collectionName: 'sliders';
+  info: {
+    singularName: 'slider';
+    pluralName: 'sliders';
+    displayName: 'Carrusel';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    image: Attribute.Media;
+    button: Attribute.Component<'components.button'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::slider.slider',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::slider.slider',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTvTv extends Schema.CollectionType {
   collectionName: 'tvs';
   info: {
@@ -947,6 +1020,8 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::cine.cine': ApiCineCine;
       'api::radio.radio': ApiRadioRadio;
+      'api::section.section': ApiSectionSection;
+      'api::slider.slider': ApiSliderSlider;
       'api::tv.tv': ApiTvTv;
     }
   }

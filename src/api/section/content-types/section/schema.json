@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sections",
+  "info": {
+    "singularName": "section",
+    "pluralName": "sections",
+    "displayName": "Secciones"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "cine": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cine.cine"
+    },
+    "radio": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::radio.radio"
+    },
+    "tv": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tv.tv"
+    }
+  }
+}

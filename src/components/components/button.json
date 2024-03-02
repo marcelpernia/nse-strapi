@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_components_buttons",
+  "info": {
+    "displayName": "button",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "Saber más"
+    },
+    "url": {
+      "type": "string"
+    },
+    "new_tab": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
